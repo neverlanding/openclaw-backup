@@ -1,0 +1,697 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.24",
+    "lastTouchedAt": "2026-03-27T02:57:14.741Z"
+  },
+  "env": {
+    "TAVILY_API_KEY": "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"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-25T01:14:09.099Z",
+    "lastRunVersion": "2026.3.23-2",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "remoteCdpTimeoutMs": 30000,
+    "executablePath": "/usr/bin/google-chrome",
+    "headless": true
+  },
+  "auth": {
+    "profiles": {
+      "qwen-portal:default": {
+        "provider": "qwen-portal",
+        "mode": "oauth"
+      },
+      "kimi-coding:default": {
+        "provider": "kimi-coding",
+        "mode": "api_key"
+      },
+      "volcengine:default": {
+        "provider": "volcengine",
+        "mode": "api_key"
+      },
+      "minimax-portal:default": {
+        "provider": "minimax-portal",
+        "mode": "oauth"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "qwen-portal": {
+        "baseUrl": "https://portal.qwen.ai/v1",
+        "apiKey": "qwen-oauth",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "coder-model",
+            "name": "Qwen Coder",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "vision-model",
+            "name": "Qwen Vision",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "kimi-coding": {
+        "baseUrl": "https://api.kimi.com/coding/",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "k2p5",
+            "name": "Kimi for Coding",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32768
+          }
+        ]
+      },
+      "zetyun": {
+        "baseUrl": "https://codingplan.alayanew.com/v1",
+        "apiKey": "sk-g7iSSTGJSg2C7E6U4aFb7a7fB4D044A1AeF81e7c1c7361C8",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "minimax-m2.5",
+            "name": "Minimax-M2.5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 256000,
+            "maxTokens": 32000
+          },
+          {
+            "id": "qwen3.5-plus",
+            "name": "Qwen3.5-Plus",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 32000
+          },
+          {
+            "id": "glm-5",
+            "name": "GLM-5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 202752,
+            "maxTokens": 32000
+          }
+        ]
+      },
+      "minimax-portal": {
+        "baseUrl": "https://api.minimaxi.com/anthropic",
+        "models": []
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "minimax-portal/MiniMax-M2.7-highspeed",
+        "fallbacks": [
+          "minimax-portal/MiniMax-M2.7",
+          "zetyun/glm-5",
+          "zetyun/qwen3.5-plus",
+          "qwen-portal/coder-model",
+          "qwen-portal/vision-model",
+          "kimi-coding/k2p5",
+          "moonshot/kimi-k2.5"
+        ]
+      },
+      "models": {
+        "qwen-portal/coder-model": {
+          "alias": "qwen"
+        },
+        "qwen-portal/vision-model": {},
+        "kimi-coding/k2p5": {
+          "alias": "Kimi K2.5"
+        },
+        "zetyun/minimax-m2.5": {
+          "alias": "Alaya-Minimax-M2.5"
+        },
+        "zetyun/qwen3.5-plus": {
+          "alias": "Alaya-Qwen3.5-Plus"
+        },
+        "zetyun/glm-5": {
+          "alias": "Alaya-GLM-5"
+        },
+        "minimax-portal/MiniMax-M2.7": {
+          "alias": "minimax-m2.7"
+        },
+        "minimax-portal/MiniMax-M2.5-Lightning": {
+          "alias": "minimax-m2.5-lightning"
+        },
+        "minimax-portal/MiniMax-M2.7-highspeed": {
+          "alias": "minimax-m2.7-highspeed"
+        },
+        "minimax-portal/MiniMax-M2.5": {
+          "alias": "minimax-m2.5"
+        },
+        "minimax-portal/MiniMax-M2.5-highspeed": {
+          "alias": "minimax-m2.5-highspeed"
+        }
+      },
+      "workspace": "/home/gary/.openclaw/workspace",
+      "memorySearch": {
+        "enabled": true,
+        "sources": [
+          "memory",
+          "sessions"
+        ],
+        "query": {
+          "hybrid": {
+            "enabled": true,
+            "vectorWeight": 0.7,
+            "textWeight": 0.3
+          }
+        }
+      },
+      "compaction": {
+        "mode": "safeguard",
+        "memoryFlush": {
+          "enabled": true,
+          "softThresholdTokens": 40000,
+          "prompt": "Distill this session to memory/YYYY-MM-DD.md. Focus on decisions, state changes, lessons, blockers. If nothing: NO_FLUSH",
+          "systemPrompt": "Extract only what is worth remembering. No fluff."
+        }
+      },
+      "timeoutSeconds": 120,
+      "heartbeat": {
+        "every": "10m",
+        "activeHours": {
+          "start": "08:00",
+          "end": "22:00",
+          "timezone": "Asia/Shanghai"
+        }
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8,
+        "announceTimeoutMs": 120000
+      }
+    },
+    "list": [
+      {
+        "id": "boss",
+        "default": true,
+        "workspace": "/home/gary/.openclaw/workspace-boss",
+        "agentDir": "/home/gary/.openclaw/agents/boss/agent"
+      },
+      {
+        "id": "planner",
+        "workspace": "/home/gary/.openclaw/workspace-planner",
+        "agentDir": "/home/gary/.openclaw/agents/planner/agent"
+      },
+      {
+        "id": "office",
+        "workspace": "/home/gary/.openclaw/workspace-office",
+        "agentDir": "/home/gary/.openclaw/agents/office/agent"
+      },
+      {
+        "id": "writer",
+        "workspace": "/home/gary/.openclaw/workspace-writer",
+        "agentDir": "/home/gary/.openclaw/agents/writer/agent"
+      },
+      {
+        "id": "info",
+        "workspace": "/home/gary/.openclaw/workspace-info",
+        "agentDir": "/home/gary/.openclaw/agents/info/agent"
+      },
+      {
+        "id": "reader",
+        "workspace": "/home/gary/.openclaw/workspace-reader",
+        "agentDir": "/home/gary/.openclaw/agents/reader/agent"
+      },
+      {
+        "id": "life",
+        "workspace": "/home/gary/.openclaw/workspace-life",
+        "agentDir": "/home/gary/.openclaw/agents/life/agent"
+      },
+      {
+        "id": "tech",
+        "workspace": "/home/gary/.openclaw/workspace-tech",
+        "agentDir": "/home/gary/.openclaw/agents/tech/agent"
+      },
+      {
+        "id": "shadow",
+        "workspace": "/home/gary/.openclaw/workspace-shadow",
+        "agentDir": "/home/gary/.openclaw/agents/shadow/agent"
+      }
+    ]
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "brave"
+      },
+      "fetch": {
+        "enabled": true
+      }
+    },
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "boss",
+      "match": {
+        "channel": "feishu",
+        "accountId": "main"
+      }
+    },
+    {
+      "agentId": "planner",
+      "match": {
+        "channel": "feishu",
+        "accountId": "1"
+      }
+    },
+    {
+      "agentId": "office",
+      "match": {
+        "channel": "feishu",
+        "accountId": "2"
+      }
+    },
+    {
+      "agentId": "writer",
+      "match": {
+        "channel": "feishu",
+        "accountId": "3"
+      }
+    },
+    {
+      "agentId": "info",
+      "match": {
+        "channel": "feishu",
+        "accountId": "4"
+      }
+    },
+    {
+      "agentId": "reader",
+      "match": {
+        "channel": "feishu",
+        "accountId": "5"
+      }
+    },
+    {
+      "agentId": "life",
+      "match": {
+        "channel": "feishu",
+        "accountId": "6"
+      }
+    },
+    {
+      "agentId": "tech",
+      "match": {
+        "channel": "feishu",
+        "accountId": "7"
+      }
+    },
+    {
+      "agentId": "shadow",
+      "match": {
+        "channel": "feishu",
+        "accountId": "shadow"
+      }
+    }
+  ],
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "feishu": {
+      "connectionMode": "websocket",
+      "enabled": true,
+      "requireMention": true,
+      "accounts": {
+        "1": {
+          "appId": "cli_a92bd5e6d339dcd2",
+          "appSecret": "uaWYfZK4P2ibdZcjER8jNbMLKF8VQw7h",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "2": {
+          "appId": "cli_a92ce59b76fb9cc2",
+          "appSecret": "e5VCtn8BxELni1WjBQvrWf3tMZChgAXu",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "3": {
+          "appId": "cli_a92cc78ef8b89ccd",
+          "appSecret": "vLuNTL40l3FJGC4mYSKExdXBENfysiWe",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "4": {
+          "appId": "cli_a92ce03f79b85cee",
+          "appSecret": "Hjo5Og04Iq8Q6OcBOPbeuhQ6044e2cck",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "5": {
+          "appId": "cli_a92ce21baa3a9cb5",
+          "appSecret": "yAaFRjjuRRUW9KahphXaDdMNMtyhSV2R",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "6": {
+          "appId": "cli_a92ce269bd789cc6",
+          "appSecret": "viCzgS2LHpvpKVanjcDAifIyCvtBBTY7",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "7": {
+          "appId": "cli_a92ce2c190769cb3",
+          "appSecret": "TE54FUVW6tqUTq2vxvp2UgLFjL2ecsxz",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71",
+            "ou_c0a3eb81d3306fa0d973376799e8bfda"
+          ]
+        },
+        "main": {
+          "appId": "cli_a90ed7d1f6389cd9",
+          "appSecret": "kVi6SWUqA740dBv2cm6YTgtCzqkPS7yi",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976",
+            "ou_f77ea00deafa4f758b787c776e3a6760",
+            "ou_62478fccac5bc80ba4b3e0a132a50a51",
+            "ou_7bb9301d4e536096202dd1b66221cb9d",
+            "ou_a3f9737a88001505e4f9eb8d9797b1ab",
+            "ou_940a58f5e640ce2664614ac3da84c7eb",
+            "ou_2a83be1183c7b62a22fb8a8a4f07c243",
+            "ou_21992d3e2f8be4c081b8c8aac8ea6a71"
+          ]
+        },
+        "shadow": {
+          "appId": "cli_a949faf202fa5bb5",
+          "appSecret": "ZaFWWfEHzDscVaetP0AxRfIeJ5TiXO8A",
+          "allowFrom": [
+            "ou_d2f4d8ac1969ad7c0c427628f320e976"
+          ]
+        },
+        "default": {
+          "appId": "cli_a92cc78ef8b89ccd",
+          "appSecret": "vLuNTL40l3FJGC4mYSKExdXBENfysiWe",
+          "allowFrom": []
+        }
+      },
+      "streaming": true,
+      "renderMode": "card",
+      "reactionNotifications": "own",
+      "threadSession": true,
+      "markdown": {
+        "tables": "bullets"
+      },
+      "footer": {
+        "status": true,
+        "elapsed": true
+      },
+      "typingIndicator": true,
+      "replyInThread": "first",
+      "textChunkLimit": 2000,
+      "mediaMaxMb": 20
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "controlUi": {
+      "allowedOrigins": [
+        "http://192.168.253.128:18789",
+        "http://localhost:18789",
+        "http://127.0.0.1:18789",
+        "https://binocularly-unculled-thomas.ngrok-free.dev",
+        "https://100.116.96.60:18789",
+        "http://100.116.96.60:18789",
+        "http://100.116.96.60",
+        "https://100.116.96.60"
+      ]
+    },
+    "auth": {
+      "mode": "token",
+      "token": "3469b98903436072011fe94bd3e60db5ea87e2b4541710c1"
+    },
+    "tailscale": {
+      "mode": "serve",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "entries": {
+      "nano-banana-pro": {
+        "enabled": true,
+        "apiKey": "AIzaSyD5ksR7W39RA_OCgdkCCgz5qeIjRZFZ6oI",
+        "env": {
+          "GEMINI_API_KEY": "AIzaSyD5ksR7W39RA_OCgdkCCgz5qeIjRZFZ6oI"
+        }
+      },
+      "send-email": {
+        "enabled": true,
+        "env": {
+          "EMAIL_SMTP_SERVER": "smtp.office365.com",
+          "EMAIL_SMTP_PORT": "587",
+          "EMAIL_SENDER": "wanggeng@zetyun.com",
+          "EMAIL_SMTP_PASSWORD": "Wg@shouqian"
+        }
+      },
+      "web-search-plus": {
+        "enabled": true,
+        "env": {
+          "SERPER_API_KEY": "094b3e4bbeb4c85522491ea4bfc2b46afc3ede76"
+        }
+      },
+      "tavily-search": {
+        "enabled": true,
+        "env": {
+          "TAVILY_API_KEY": "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"
+        }
+      },
+      "api-gateway": {
+        "enabled": true,
+        "env": {
+          "MATON_API_KEY": "AWOE1VmhfcXY9M-qOVyoj41xpBUYeOaPIOALi85QA6TTlWj0v0E-caoUdyMtKemUXEUsDfMI0R3wvqMLq8javleKkbXROu-KxEI"
+        }
+      },
+      "baidu-search": {
+        "enabled": true,
+        "env": {
+          "BAIDU_API_KEY": "bce-v3/ALTAK-QafnUdBjePqMsMj5oLQID/24d560ba0d622944696ba412976f00554f334ef0"
+        }
+      },
+      "tmux": {
+        "enabled": true
+      },
+      "trello": {
+        "enabled": true
+      },
+      "model-usage": {
+        "enabled": true
+      },
+      "nano-pdf": {
+        "enabled": true
+      }
+    }
+  },
+  "plugins": {
+    "allow": [
+      "wecom-app",
+      "qwen-portal-auth",
+      "feishu",
+      "minimax"
+    ],
+    "entries": {
+      "qwen-portal-auth": {
+        "enabled": true
+      },
+      "wecom-app": {
+        "enabled": true
+      },
+      "feishu": {
+        "enabled": true
+      },
+      "openclaw-weixin": {
+        "enabled": true
+      },
+      "brave": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "apiKey": "BSAuGFtGskrfJg5ygPOorQ7pI41YM6d"
+          }
+        }
+      },
+      "minimax": {
+        "enabled": true
+      }
+    },
+    "installs": {
+      "wecom-app": {
+        "source": "npm",
+        "spec": "@openclaw-china/wecom-app",
+        "installPath": "/home/gary/.openclaw/extensions/wecom-app",
+        "version": "0.1.15",
+        "resolvedName": "@openclaw-china/wecom-app",
+        "resolvedVersion": "0.1.15",
+        "resolvedSpec": "@openclaw-china/wecom-app@0.1.15",
+        "integrity": "sha512-eR0pSrjIBYIEPmrBuIBVjOsvlicxapmklw0A3piMvPL49+xHrB4f2+fpUpggs8gHfUFjEmx0v+3IpFLAiLrQ0Q==",
+        "shasum": "990de4c9e18141c78ceede635e01e513173268f7",
+        "resolvedAt": "2026-02-28T10:35:32.832Z",
+        "installedAt": "2026-02-28T10:37:04.443Z"
+      },
+      "feishu": {
+        "source": "npm",
+        "spec": "@larksuiteoapi/feishu-openclaw-plugin",
+        "installPath": "/home/gary/.openclaw/extensions/feishu-openclaw-plugin",
+        "version": "2026.3.8"
+      },
+      "openclaw-weixin": {
+        "source": "npm",
+        "spec": "@tencent-weixin/openclaw-weixin",
+        "installPath": "/home/gary/.openclaw/extensions/openclaw-weixin",
+        "version": "1.0.2",
+        "resolvedName": "@tencent-weixin/openclaw-weixin",
+        "resolvedVersion": "1.0.2",
+        "resolvedSpec": "@tencent-weixin/openclaw-weixin@1.0.2",
+        "integrity": "sha512-kYPEowHB/0VWt9nQFee/AS6Fb+jbnu38wjkgZDBdKTuJoBL0IBW2obQ0ymgFKBFJJL9rDwnFrb/17ORGZD/X8Q==",
+        "shasum": "244baf0a873683a9c350d0f0b5bc055c07b0eb39",
+        "resolvedAt": "2026-03-23T08:23:36.745Z",
+        "installedAt": "2026-03-23T08:23:40.677Z"
+      }
+    }
+  }
+}

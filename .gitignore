@@ -1,8 +1,6 @@
-# 排除大文件和临时文件
+# 排除日志和缓存
 *.log
 *.log.*
-
-# 排除缓存
 .cache/
 .cache-*
 
@@ -31,19 +29,8 @@ node_modules/
 # 排除会话历史文件
 *.jsonl
 
-# 排除密集目录
+# 排除特定大目录
 agents/*/sessions/
 agents/*/cache/
 workspace-*/tmp/
 workspace-*/memory/archive/
-
-# 只保留活跃记忆
-memory/*.md
-!memory/archive/
-
-# 保留配置文件但排除大文件
-config/
-agents/
-skills/
-shared-memory/
-workspaces/
