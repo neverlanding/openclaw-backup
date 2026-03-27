@@ -455,4 +455,61 @@ echo "$(date '+%Y-%m-%d %H:%M')|life|baidu-search|济南天气" >> ~/.openclaw/s
 
 ---
 
-*最后更新: 2026-03-27 16:28*
+### 9. Claude Code 编程环境（重要！）
+
+**⚠️ 所有助手必须知道：Claude Code 编程环境已配置完毕！**
+
+#### 环境信息
+
+| 项目 | 内容 |
+|:---|:---|
+| **CLI路径** | `~/.npm-global/bin/claude` |
+| **版本** | 2.1.81 |
+| **配置目录** | `~/.claude/` |
+| **可用性** | ✅ 已安装并可用 |
+
+#### 使用场景
+
+**遇到以下情况时，可调用 Claude Code：**
+- 复杂代码编写/重构
+- PR 代码审查
+- 大型代码库分析
+- 自动化脚本开发
+- 需要多轮迭代的编程任务
+
+#### 调用方式
+
+**使用 coding-agent 技能：**
+
+```bash
+# 通过 sessions_spawn 调用 Claude Code
+sessions_spawn(
+  task: "编程任务描述",
+  runtime: "acp",        # 使用 ACP harness
+  agentId: "claude-code", # Claude Code agent
+  pty: true              # 需要 PTY 模式
+)
+```
+
+**或直接使用 exec 工具调用：**
+
+```bash
+claude --print --permission-mode bypassPermissions "任务描述"
+```
+
+#### 与技术搭子的区别
+
+| 工具 | 擅长 | 适用场景 |
+|:---|:---|:---|
+| **技术搭子** | 现有代码修改、小脚本 | 简单任务、快速修复 |
+| **Claude Code** | 复杂编程、代码审查 | 大型项目、多轮迭代 |
+
+#### 注意事项
+
+- ✅ 复杂编程任务优先考虑 Claude Code
+- ✅ 技术搭子无法解决时，调用 Claude Code
+- ✅ 两者可以协作（技术搭子拆解任务 → Claude Code 实现）
+
+---
+
+*最后更新: 2026-03-27 17:21*
